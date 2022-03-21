@@ -1,9 +1,23 @@
-import { Text, View } from 'react-native';
+import { Text, View, Button } from 'react-native';
+import { RootStackScreenProps } from '../types';
 
-export default function Tab1Screen() {
+export default function Tab1Screen({
+  navigation,
+}: RootStackScreenProps<'NotFound'>) {
   return (
     <View>
-      <Text>스크린1</Text>
+      <Button
+        title="Tab1Detail"
+        onPress={() => navigation.navigate('Tab1Detail')}
+      />
+    </View>
+  );
+}
+
+export function Tab1Detail() {
+  return (
+    <View>
+      <Text>Tab1Detail</Text>
     </View>
   );
 }

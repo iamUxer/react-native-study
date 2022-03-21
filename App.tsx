@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Tab1Screen from './screens/Tab1Screen';
+import Tab1Screen, { Tab1Detail } from './screens/Tab1Screen';
 import Tab2Screen from './screens/Tab2Screen';
 import Tab3Screen from './screens/Tab3Screen';
 import Tab4Screen from './screens/Tab4Screen';
@@ -71,6 +71,7 @@ export default function App() {
           component={BottomTabNavigator}
           options={{ headerShown: false }}
         />
+        <Stack.Screen name="Tab1Detail" component={Tab1Detail} />
       </Stack.Navigator>
     </NavigationContainer>
   );
