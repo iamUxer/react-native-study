@@ -1,4 +1,4 @@
-import { Text, View, Button } from 'react-native';
+import { Text, View, Button, ScrollView } from 'react-native';
 import { RootStackScreenProps } from '../types';
 
 export default function Tab1Screen({
@@ -16,8 +16,119 @@ export default function Tab1Screen({
 
 export function Tab1Detail() {
   return (
-    <View>
+    <ScrollView>
       <Text>Tab1Detail</Text>
-    </View>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+      <Text>Tab1Detail</Text>
+    </ScrollView>
   );
 }

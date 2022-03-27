@@ -2,11 +2,14 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { FontAwesome } from '@expo/vector-icons';
 import Tab1Screen, { Tab1Detail } from './screens/Tab1Screen';
 import Tab2Screen from './screens/Tab2Screen';
 import Tab3Screen from './screens/Tab3Screen';
 import Tab4Screen from './screens/Tab4Screen';
 import Tab5Screen from './screens/Tab5Screen';
+import Modal1Screen from './screens/Modal';
+import { Pressable } from 'react-native';
 
 const BottomTab = createBottomTabNavigator();
 function BottomTabNavigator() {
@@ -19,6 +22,7 @@ function BottomTabNavigator() {
           title: 'Title1',
           tabBarLabel: 'TabBarLabel1',
           headerTitleAlign: 'center',
+          tabBarIcon: () => <FontAwesome name="code" size={30} />,
         }}
       />
       <BottomTab.Screen
@@ -28,6 +32,7 @@ function BottomTabNavigator() {
           title: 'Title2',
           tabBarLabel: 'TabBarLabel2',
           headerTitleAlign: 'center',
+          tabBarIcon: () => <FontAwesome name="code" size={30} />,
         }}
       />
       <BottomTab.Screen
@@ -37,6 +42,7 @@ function BottomTabNavigator() {
           title: 'Title3',
           tabBarLabel: 'TabBarLabel3',
           headerTitleAlign: 'center',
+          tabBarIcon: () => <FontAwesome name="code" size={30} />,
         }}
       />
       <BottomTab.Screen
@@ -46,6 +52,7 @@ function BottomTabNavigator() {
           title: 'Title4',
           tabBarLabel: 'TabBarLabel4',
           headerTitleAlign: 'center',
+          tabBarIcon: () => <FontAwesome name="code" size={30} />,
         }}
       />
       <BottomTab.Screen
@@ -55,6 +62,7 @@ function BottomTabNavigator() {
           title: 'Title5',
           tabBarLabel: 'TabBarLabel5',
           headerTitleAlign: 'center',
+          tabBarIcon: () => <FontAwesome name="code" size={30} />,
         }}
       />
     </BottomTab.Navigator>
@@ -72,6 +80,20 @@ export default function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen name="Tab1Detail" component={Tab1Detail} />
+        <Stack.Group screenOptions={{ presentation: 'modal' }}>
+          <Stack.Screen
+            name="Modal1"
+            component={Modal1Screen}
+            options={({ navigation }) => ({
+              headerLeft: () => <></>,
+              headerRight: () => (
+                <Pressable onPress={() => navigation.goBack()}>
+                  <FontAwesome name="close" size={25} />
+                </Pressable>
+              ),
+            })}
+          />
+        </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
   );
