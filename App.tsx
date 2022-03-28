@@ -11,7 +11,7 @@ import Tab5Screen from './screens/Tab5Screen';
 import Modal1Screen from './screens/Modal';
 import { Pressable } from 'react-native';
 import { Provider } from 'react-redux';
-import store from './store/index.js';
+import store from './store/index';
 
 const BottomTab = createBottomTabNavigator();
 function BottomTabNavigator() {

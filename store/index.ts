@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import membersReducer from './members/membersSlice.js';
+import membersReducer from './members/membersSlice';
 
 export default configureStore({
   reducer: {

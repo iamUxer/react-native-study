@@ -10,7 +10,11 @@ import {
 import { FontAwesome } from '@expo/vector-icons';
 import { StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { stateMembers, actionsMembers } from '../store/members/membersSlice.js';
+import {
+  stateMembers,
+  actionsMembers,
+  Member,
+} from '../store/members/membersSlice';
 
 const styles = StyleSheet.create({
   thead: {
@@ -60,9 +64,6 @@ const styles = StyleSheet.create({
 });
 
 function Tab3Screen({ navigation }: any) {
-  const dispatch = useDispatch();
-  const member = { ...useSelector(stateMembers).member };
-  console.log(member);
   return (
     <>
       <View nativeID="thead" style={styles.thead}>
@@ -728,6 +729,9 @@ function Tab3Screen({ navigation }: any) {
 
 export function ModalCreate(props: any) {
   console.log(props.route.name);
+  const dispatch = useDispatch();
+  const member: Member = { ...useSelector(stateMembers).member };
+  console.log(member);
   return (
     <>
       <View nativeID="thead" style={styles.thead}>
@@ -742,12 +746,27 @@ export function ModalCreate(props: any) {
           <TextInput
             style={[styles.memberName, styles.borderStyle]}
             placeholder="Name"
+            value={member.name}
+            onChangeText={(text) => {
+              member.name = text;
+              dispatch(actionsMembers.memberSet(member));
+            }}
           />
           <TextInput
             style={[styles.memberAge, styles.borderStyle]}
             placeholder="Age"
+            value={member.age}
+            onChangeText={(text) => {
+              member.age = text;
+              dispatch(actionsMembers.memberSet(member));
+            }}
           />
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
+          <Pressable
+            onPress={() => {
+              () => dispatch(actionsMembers.membersCreate(member));
+            }}
+            style={styles.memberUpdate}
+          >
             <FontAwesome
               name="pencil"
               size={24}
