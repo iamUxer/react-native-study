@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { StyleSheet } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import { stateMembers, actionsMembers } from '../store/members/membersSlice.js';
 
 const styles = StyleSheet.create({
   thead: {
@@ -58,6 +60,9 @@ const styles = StyleSheet.create({
 });
 
 function Tab3Screen({ navigation }: any) {
+  const dispatch = useDispatch();
+  const member = { ...useSelector(stateMembers).member };
+  console.log(member);
   return (
     <>
       <View nativeID="thead" style={styles.thead}>

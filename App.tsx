@@ -10,6 +10,8 @@ import Tab4Screen from './screens/Tab4Screen';
 import Tab5Screen from './screens/Tab5Screen';
 import Modal1Screen from './screens/Modal';
 import { Pressable } from 'react-native';
+import { Provider } from 'react-redux';
+import store from './store/index.js';
 
 const BottomTab = createBottomTabNavigator();
 function BottomTabNavigator() {
@@ -81,53 +83,55 @@ function BottomTabNavigator() {
 const Stack = createNativeStackNavigator();
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Root"
-          component={BottomTabNavigator}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="Tab1Detail" component={Tab1Detail} />
-        <Stack.Group screenOptions={{ presentation: 'modal' }}>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator>
           <Stack.Screen
-            name="Modal1"
-            component={Modal1Screen}
-            options={({ navigation }) => ({
-              headerLeft: () => <></>,
-              headerRight: () => (
-                <Pressable onPress={() => navigation.goBack()}>
-                  <FontAwesome name="close" size={25} />
-                </Pressable>
-              ),
-            })}
+            name="Root"
+            component={BottomTabNavigator}
+            options={{ headerShown: false }}
           />
-          <Stack.Screen
-            name="ModalCreate"
-            component={ModalCreate}
-            options={({ navigation }) => ({
-              headerLeft: () => <></>,
-              headerRight: () => (
-                <Pressable onPress={() => navigation.goBack()}>
-                  <FontAwesome name="close" size={25} />
-                </Pressable>
-              ),
-            })}
-          />
-          <Stack.Screen
-            name="ModalUpdate"
-            component={ModalUpdate}
-            options={({ navigation }) => ({
-              headerLeft: () => <></>,
-              headerRight: () => (
-                <Pressable onPress={() => navigation.goBack()}>
-                  <FontAwesome name="close" size={25} />
-                </Pressable>
-              ),
-            })}
-          />
-        </Stack.Group>
-      </Stack.Navigator>
-    </NavigationContainer>
+          <Stack.Screen name="Tab1Detail" component={Tab1Detail} />
+          <Stack.Group screenOptions={{ presentation: 'modal' }}>
+            <Stack.Screen
+              name="Modal1"
+              component={Modal1Screen}
+              options={({ navigation }) => ({
+                headerLeft: () => <></>,
+                headerRight: () => (
+                  <Pressable onPress={() => navigation.goBack()}>
+                    <FontAwesome name="close" size={25} />
+                  </Pressable>
+                ),
+              })}
+            />
+            <Stack.Screen
+              name="ModalCreate"
+              component={ModalCreate}
+              options={({ navigation }) => ({
+                headerLeft: () => <></>,
+                headerRight: () => (
+                  <Pressable onPress={() => navigation.goBack()}>
+                    <FontAwesome name="close" size={25} />
+                  </Pressable>
+                ),
+              })}
+            />
+            <Stack.Screen
+              name="ModalUpdate"
+              component={ModalUpdate}
+              options={({ navigation }) => ({
+                headerLeft: () => <></>,
+                headerRight: () => (
+                  <Pressable onPress={() => navigation.goBack()}>
+                    <FontAwesome name="close" size={25} />
+                  </Pressable>
+                ),
+              })}
+            />
+          </Stack.Group>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
