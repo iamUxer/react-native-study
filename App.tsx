@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesome } from '@expo/vector-icons';
 import Tab1Screen, { Tab1Detail } from './screens/Tab1Screen';
 import Tab2Screen from './screens/Tab2Screen';
-import Tab3Screen from './screens/Tab3Screen';
+import Tab3Screen, { ModalCreate, ModalUpdate } from './screens/Tab3Screen';
 import Tab4Screen from './screens/Tab4Screen';
 import Tab5Screen from './screens/Tab5Screen';
 import Modal1Screen from './screens/Modal';
@@ -38,12 +38,21 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="Tab3"
         component={Tab3Screen}
-        options={{
+        options={({ navigation }) => ({
           title: 'Title3',
           tabBarLabel: 'TabBarLabel3',
           headerTitleAlign: 'center',
           tabBarIcon: () => <FontAwesome name="code" size={30} />,
-        }}
+          headerRight: () => (
+            <Pressable onPress={() => navigation.navigate('ModalCreate')}>
+              <FontAwesome
+                name="pencil"
+                size={24}
+                style={{ marginRight: 24, color: '#4285F4' }}
+              />
+            </Pressable>
+          ),
+        })}
       />
       <BottomTab.Screen
         name="Tab4"
@@ -84,6 +93,30 @@ export default function App() {
           <Stack.Screen
             name="Modal1"
             component={Modal1Screen}
+            options={({ navigation }) => ({
+              headerLeft: () => <></>,
+              headerRight: () => (
+                <Pressable onPress={() => navigation.goBack()}>
+                  <FontAwesome name="close" size={25} />
+                </Pressable>
+              ),
+            })}
+          />
+          <Stack.Screen
+            name="ModalCreate"
+            component={ModalCreate}
+            options={({ navigation }) => ({
+              headerLeft: () => <></>,
+              headerRight: () => (
+                <Pressable onPress={() => navigation.goBack()}>
+                  <FontAwesome name="close" size={25} />
+                </Pressable>
+              ),
+            })}
+          />
+          <Stack.Screen
+            name="ModalUpdate"
+            component={ModalUpdate}
             options={({ navigation }) => ({
               headerLeft: () => <></>,
               headerRight: () => (
