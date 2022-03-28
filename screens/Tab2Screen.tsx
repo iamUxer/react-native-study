@@ -6,7 +6,7 @@ export default function Tab2Screen({ navigation }: any) {
       <Text>
         <Button
           title="Open Modal1"
-          onPress={() => navigation.naviate('Modal1')}
+          onPress={() => navigation.navigate('Modal1')}
         />
       </Text>
     </View>
