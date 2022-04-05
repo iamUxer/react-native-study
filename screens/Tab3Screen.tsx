@@ -94,7 +94,7 @@ function Tab3Screen({ navigation }: any) {
             <Text style={styles.memberAge}>{member.age}</Text>
             <Pressable
               onPress={() => {
-                navigation.navigate('ModalUpdate');
+                navigation.navigate('ModalUpdate', index);
               }}
               style={styles.memberUpdate}
             >
@@ -187,7 +187,12 @@ export function ModalCreate(props: any) {
 }
 
 export function ModalUpdate(props: any) {
-  console.log(props.route.name);
+  const dispatch = useDispatch();
+  const { navigation } = props;
+  const index: number = props.route.params;
+  const members = JSON.parse(JSON.stringify(useSelector(stateMembers).members));
+  const member = members[index];
+  console.log(props.route.name, props);
   return (
     <>
       <View nativeID="thead" style={styles.thead}>
@@ -202,13 +207,26 @@ export function ModalUpdate(props: any) {
           <TextInput
             style={[styles.memberName, styles.borderStyle]}
             placeholder="Name"
+            value={member.name}
+            onChangeText={(text) => {
+              member.name = text;
+              dispatch(actionsMembers.membersSet(members));
+            }}
           />
           <TextInput
             style={[styles.memberAge, styles.borderStyle]}
             placeholder="Age"
+            value={String(member.age)}
+            onChangeText={(text) => {
+              member.age = text;
+              dispatch(actionsMembers.membersSet(members));
+            }}
           />
           <Pressable
-            onPress={() => {}}
+            onPress={() => {
+              dispatch(actionsMembers.membersUpdate({ index, member }));
+              navigation.goBack();
+            }}
             style={[
               styles.memberUpdate,
               { alignItems: 'center', justifyContent: 'center' },

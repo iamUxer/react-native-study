@@ -44,6 +44,12 @@ export const membersSlice = createSlice({
     membersDelete(state, action) {
       state.members.splice(action.payload, 1);
     },
+    membersSet: (state, action) => {
+      state.members = action.payload;
+    },
+    membersUpdate: (state, action) => {
+      state.members[action.payload.index] = action.payload.member;
+    },
   },
 });
 
