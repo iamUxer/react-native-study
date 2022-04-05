@@ -11,11 +11,9 @@ import {
 import { FontAwesome } from '@expo/vector-icons';
 import { StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  stateMembers,
-  actionsMembers,
-  Member,
-} from '../store/members/membersSlice';
+import { Member } from '../store/members/membersSlice';
+import { stateMembers } from '../store/members/membersSlice';
+import actionsMembers from '../store/members/membersActions';
 
 const styles = StyleSheet.create({
   thead: {
