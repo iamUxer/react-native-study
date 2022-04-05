@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect } from 'react';
 import {
   Text,
   TextInput,
@@ -64,6 +65,18 @@ const styles = StyleSheet.create({
 });
 
 function Tab3Screen({ navigation }: any) {
+  const dispatch = useDispatch();
+  const members = JSON.parse(JSON.stringify(useSelector(stateMembers).members));
+  // const members = Object.assign([], useSelector(stateMembers).members);
+  useEffect(() => {
+    dispatch(
+      actionsMembers.memberSet({
+        name: '',
+        age: '',
+      })
+    );
+    dispatch(actionsMembers.membersRead());
+  }, [dispatch]);
   return (
     <>
       <View nativeID="thead" style={styles.thead}>
@@ -75,661 +88,55 @@ function Tab3Screen({ navigation }: any) {
         </View>
       </View>
       <ScrollView nativeID="tbody" style={styles.tbody}>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>홍길동</Text>
-          <Text style={styles.memberAge}>39</Text>
-          <Pressable
-            onPress={() => {
-              navigation.navigate('ModalUpdate');
-            }}
-            style={styles.memberUpdate}
-          >
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              Alert.alert('Delete member', '삭제 하시겠습니까?', [
-                {
-                  text: 'Cancel',
-                  onPress: () => console.log('Cancel Pressed'),
-                  style: 'cancel',
-                },
-                { text: 'OK', onPress: () => console.log('OK Pressed') },
-              ]);
-            }}
-            style={styles.memberDelete}
-          >
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>김삼순</Text>
-          <Text style={styles.memberAge}>33</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>홍명보</Text>
-          <Text style={styles.memberAge}>44</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>박지삼</Text>
-          <Text style={styles.memberAge}>22</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>권명순</Text>
-          <Text style={styles.memberAge}>10</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>홍길동</Text>
-          <Text style={styles.memberAge}>39</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>김삼순</Text>
-          <Text style={styles.memberAge}>33</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>홍명보</Text>
-          <Text style={styles.memberAge}>44</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>박지삼</Text>
-          <Text style={styles.memberAge}>22</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>권명순</Text>
-          <Text style={styles.memberAge}>10</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>홍길동</Text>
-          <Text style={styles.memberAge}>39</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>김삼순</Text>
-          <Text style={styles.memberAge}>33</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>홍명보</Text>
-          <Text style={styles.memberAge}>44</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>박지삼</Text>
-          <Text style={styles.memberAge}>22</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>권명순</Text>
-          <Text style={styles.memberAge}>10</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>홍길동</Text>
-          <Text style={styles.memberAge}>39</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>김삼순</Text>
-          <Text style={styles.memberAge}>33</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>홍명보</Text>
-          <Text style={styles.memberAge}>44</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>박지삼</Text>
-          <Text style={styles.memberAge}>22</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>권명순</Text>
-          <Text style={styles.memberAge}>10</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>홍길동</Text>
-          <Text style={styles.memberAge}>39</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>김삼순</Text>
-          <Text style={styles.memberAge}>33</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>홍명보</Text>
-          <Text style={styles.memberAge}>44</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>박지삼</Text>
-          <Text style={styles.memberAge}>22</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>권명순</Text>
-          <Text style={styles.memberAge}>10</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>홍길동</Text>
-          <Text style={styles.memberAge}>39</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>김삼순</Text>
-          <Text style={styles.memberAge}>33</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>홍명보</Text>
-          <Text style={styles.memberAge}>44</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>박지삼</Text>
-          <Text style={styles.memberAge}>22</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>권명순</Text>
-          <Text style={styles.memberAge}>10</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>홍길동</Text>
-          <Text style={styles.memberAge}>39</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>김삼순</Text>
-          <Text style={styles.memberAge}>33</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>홍명보</Text>
-          <Text style={styles.memberAge}>44</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>박지삼</Text>
-          <Text style={styles.memberAge}>22</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
-        <View nativeID="member" style={styles.member}>
-          <Text style={styles.memberName}>권명순</Text>
-          <Text style={styles.memberAge}>10</Text>
-          <Pressable onPress={() => {}} style={styles.memberUpdate}>
-            <FontAwesome
-              name="edit"
-              size={24}
-              style={[styles.memberUpdate, { color: '#FBBC05' }]}
-            />
-          </Pressable>
-          <Pressable onPress={() => {}} style={styles.memberDelete}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={[styles.memberDelete, { color: '#EA4335' }]}
-            />
-          </Pressable>
-        </View>
+        {members.map((member: Member, index: number) => (
+          <View key={index} nativeID="member" style={styles.member}>
+            <Text style={styles.memberName}>{member.name}</Text>
+            <Text style={styles.memberAge}>{member.age}</Text>
+            <Pressable
+              onPress={() => {
+                navigation.navigate('ModalUpdate', index);
+              }}
+              style={styles.memberUpdate}
+            >
+              <FontAwesome
+                name="edit"
+                size={24}
+                style={[styles.memberUpdate, { color: '#FBBC05' }]}
+              />
+            </Pressable>
+            <Pressable
+              onPress={() => {
+                Alert.alert('Delete member', '삭제 하시겠습니까?', [
+                  {
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                  },
+                  {
+                    text: 'OK',
+                    onPress: () =>
+                      dispatch(actionsMembers.membersDelete(index)),
+                  },
+                ]);
+              }}
+              style={styles.memberDelete}
+            >
+              <FontAwesome
+                name="trash"
+                size={24}
+                style={[styles.memberDelete, { color: '#EA4335' }]}
+              />
+            </Pressable>
+          </View>
+        ))}
       </ScrollView>
     </>
   );
 }
 
 export function ModalCreate(props: any) {
-  console.log(props.route.name);
   const dispatch = useDispatch();
+  console.log(props.route.name);
   const member: Member = { ...useSelector(stateMembers).member };
   console.log(member);
   return (
@@ -755,9 +162,9 @@ export function ModalCreate(props: any) {
           <TextInput
             style={[styles.memberAge, styles.borderStyle]}
             placeholder="Age"
-            value={member.age}
+            value={String(member.age)}
             onChangeText={(text) => {
-              member.age = text;
+              member.age = Number(text);
               dispatch(actionsMembers.memberSet(member));
             }}
           />
@@ -780,7 +187,12 @@ export function ModalCreate(props: any) {
 }
 
 export function ModalUpdate(props: any) {
-  console.log(props.route.name);
+  const dispatch = useDispatch();
+  const { navigation } = props;
+  const index: number = props.route.params;
+  const members = JSON.parse(JSON.stringify(useSelector(stateMembers).members));
+  const member = members[index];
+  console.log(props.route.name, props);
   return (
     <>
       <View nativeID="thead" style={styles.thead}>
@@ -795,13 +207,26 @@ export function ModalUpdate(props: any) {
           <TextInput
             style={[styles.memberName, styles.borderStyle]}
             placeholder="Name"
+            value={member.name}
+            onChangeText={(text) => {
+              member.name = text;
+              dispatch(actionsMembers.membersSet(members));
+            }}
           />
           <TextInput
             style={[styles.memberAge, styles.borderStyle]}
             placeholder="Age"
+            value={String(member.age)}
+            onChangeText={(text) => {
+              member.age = text;
+              dispatch(actionsMembers.membersSet(members));
+            }}
           />
           <Pressable
-            onPress={() => {}}
+            onPress={() => {
+              dispatch(actionsMembers.membersUpdate({ index, member }));
+              navigation.goBack();
+            }}
             style={[
               styles.memberUpdate,
               { alignItems: 'center', justifyContent: 'center' },
