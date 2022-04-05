@@ -112,7 +112,11 @@ function Tab3Screen({ navigation }: any) {
                     onPress: () => console.log('Cancel Pressed'),
                     style: 'cancel',
                   },
-                  { text: 'OK', onPress: () => console.log('OK Pressed') },
+                  {
+                    text: 'OK',
+                    onPress: () =>
+                      dispatch(actionsMembers.membersDelete(index)),
+                  },
                 ]);
               }}
               style={styles.memberDelete}

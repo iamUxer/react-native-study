@@ -41,6 +41,9 @@ export const membersSlice = createSlice({
         }
       );
     },
+    membersDelete(state, action) {
+      state.members.splice(action.payload, 1);
+    },
   },
 });
 
