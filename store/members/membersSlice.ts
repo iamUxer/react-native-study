@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 // Members, Member 타입 생성
 export declare interface Member {
   name: string;
-  age: string;
+  age: string | number;
 }
 export declare interface MembersState {
   members: Array<Member>;
@@ -11,16 +11,7 @@ export declare interface MembersState {
 }
 
 const membersState: MembersState = {
-  members: [
-    {
-      name: '',
-      age: '',
-    },
-    {
-      name: '',
-      age: '',
-    },
-  ],
+  members: [],
   member: {
     name: '',
     age: '',
@@ -37,6 +28,18 @@ export const membersSlice = createSlice({
     membersCreate: (state, action) => {
       state.members.push(action.payload);
       console.log('membersCreate', state.members);
+    },
+    membersRead: (state) => {
+      state.members.push(
+        {
+          name: '홍길동',
+          age: 20,
+        },
+        {
+          name: '춘향이',
+          age: 16,
+        }
+      );
     },
   },
 });
