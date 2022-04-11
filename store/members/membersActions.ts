@@ -62,7 +62,21 @@ export function* takeEveryMembers() {
   yield takeEvery(membersRead, membersRead$);
 
   yield takeEvery(membersUpdate, function* (action) {
-    yield put(actionsMembers.membersUpdate(action.payload));
+    const { navigation, member, index } = action.payload;
+    try {
+      const response: AxiosResponse<MembersResult> = yield call(() =>
+        axios.patch(
+          'http://192.168.219.103:3100/api/v1/members/' + index,
+          member
+        )
+      );
+      console.log('Done membersUpdate', response);
+      yield membersRead$();
+      alert('Updated');
+      navigation.goBack();
+    } catch (error: any) {
+      axiosError(error);
+    }
   });
 
   yield takeEvery(membersDelete, function* (action) {

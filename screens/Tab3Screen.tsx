@@ -225,8 +225,9 @@ export function ModalUpdate(props: any) {
           />
           <Pressable
             onPress={() => {
-              dispatch(actionsMembers.membersUpdate({ index, member }));
-              navigation.goBack();
+              dispatch(
+                actionsMembers.membersUpdate({ index, member, navigation })
+              );
             }}
             style={[
               styles.memberUpdate,
