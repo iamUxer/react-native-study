@@ -66,7 +66,17 @@ export function* takeEveryMembers() {
   });
 
   yield takeEvery(membersDelete, function* (action) {
-    yield put(actionsMembers.membersDelete(action.payload));
+    try {
+      const response: AxiosResponse<MembersResult> = yield call(() =>
+        axios.delete(
+          'http://192.168.219.103:3100/api/v1/members/' + action.payload
+        )
+      );
+      console.log('Done membersUpdate', response);
+      yield membersRead$();
+    } catch (error: any) {
+      axiosError(error);
+    }
   });
 }
 
