@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useEffect } from 'react';
 import {
   Text,
@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Member } from '../store/members/membersSlice';
 import { stateMembers } from '../store/members/membersSlice';
 import actionsMembers from '../store/members/membersActions';
+import { RefreshControl } from 'react-native';
 
 const styles = StyleSheet.create({
   thead: {
@@ -64,7 +65,8 @@ const styles = StyleSheet.create({
 
 function Tab3Screen({ navigation }: any) {
   const dispatch = useDispatch();
-  const members = JSON.parse(JSON.stringify(useSelector(stateMembers).members));
+  // const members = JSON.parse(JSON.stringify(useSelector(stateMembers).members));
+  const { members, refreshing } = useSelector(stateMembers);
   // const members = Object.assign([], useSelector(stateMembers).members);
   useEffect(() => {
     dispatch(
@@ -75,6 +77,7 @@ function Tab3Screen({ navigation }: any) {
     );
     dispatch(actionsMembers.membersRead());
   }, [dispatch]);
+
   return (
     <>
       <View nativeID="thead" style={styles.thead}>
@@ -85,7 +88,18 @@ function Tab3Screen({ navigation }: any) {
           <Text style={[styles.flex1, styles.textAlignCenter]}>삭제</Text>
         </View>
       </View>
-      <ScrollView nativeID="tbody" style={styles.tbody}>
+      <ScrollView
+        nativeID="tbody"
+        style={styles.tbody}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={() => {
+              dispatch(actionsMembers.membersRead());
+            }}
+          />
+        }
+      >
         {members.map((member: Member, index: number) => (
           <View key={index} nativeID="member" style={styles.member}>
             <Text style={styles.memberName}>{member.name}</Text>
@@ -133,6 +147,7 @@ function Tab3Screen({ navigation }: any) {
 }
 
 export function ModalCreate(props: any) {
+  const { navigation } = props;
   const dispatch = useDispatch();
   console.log(props.route.name);
   const member: Member = { ...useSelector(stateMembers).member };
@@ -161,6 +176,7 @@ export function ModalCreate(props: any) {
             style={[styles.memberAge, styles.borderStyle]}
             placeholder="Age"
             value={String(member.age)}
+            keyboardType="number-pad"
             onChangeText={(text) => {
               member.age = Number(text);
               dispatch(actionsMembers.memberSet(member));
@@ -168,7 +184,7 @@ export function ModalCreate(props: any) {
           />
           <Pressable
             onPress={() => {
-              () => dispatch(actionsMembers.membersCreate(member));
+              dispatch(actionsMembers.membersCreate({ member, navigation }));
             }}
             style={styles.memberUpdate}
           >
@@ -215,6 +231,7 @@ export function ModalUpdate(props: any) {
             style={[styles.memberAge, styles.borderStyle]}
             placeholder="Age"
             value={String(member.age)}
+            keyboardType="number-pad"
             onChangeText={(text) => {
               member.age = text;
               dispatch(actionsMembers.membersSet(members));
@@ -222,8 +239,9 @@ export function ModalUpdate(props: any) {
           />
           <Pressable
             onPress={() => {
-              dispatch(actionsMembers.membersUpdate({ index, member }));
-              navigation.goBack();
+              dispatch(
+                actionsMembers.membersUpdate({ index, member, navigation })
+              );
             }}
             style={[
               styles.memberUpdate,
