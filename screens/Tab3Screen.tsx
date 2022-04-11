@@ -133,6 +133,7 @@ function Tab3Screen({ navigation }: any) {
 }
 
 export function ModalCreate(props: any) {
+  const { navigation } = props;
   const dispatch = useDispatch();
   console.log(props.route.name);
   const member: Member = { ...useSelector(stateMembers).member };
@@ -161,6 +162,7 @@ export function ModalCreate(props: any) {
             style={[styles.memberAge, styles.borderStyle]}
             placeholder="Age"
             value={String(member.age)}
+            keyboardType="number-pad"
             onChangeText={(text) => {
               member.age = Number(text);
               dispatch(actionsMembers.memberSet(member));
@@ -168,7 +170,7 @@ export function ModalCreate(props: any) {
           />
           <Pressable
             onPress={() => {
-              () => dispatch(actionsMembers.membersCreate(member));
+              dispatch(actionsMembers.membersCreate({ member, navigation }));
             }}
             style={styles.memberUpdate}
           >
@@ -215,6 +217,7 @@ export function ModalUpdate(props: any) {
             style={[styles.memberAge, styles.borderStyle]}
             placeholder="Age"
             value={String(member.age)}
+            keyboardType="number-pad"
             onChangeText={(text) => {
               member.age = text;
               dispatch(actionsMembers.membersSet(members));

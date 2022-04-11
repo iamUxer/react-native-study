@@ -18,6 +18,10 @@ const membersState: MembersState = {
   },
 };
 
+export declare interface MembersResult {
+  result: string;
+}
+
 export const membersSlice = createSlice({
   name: 'members',
   initialState: membersState,

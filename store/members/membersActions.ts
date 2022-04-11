@@ -1,6 +1,9 @@
-import { put, takeEvery } from 'redux-saga/effects';
+import axios, { AxiosResponse } from 'axios';
+import { axiosError } from '../common';
+import { put, takeEvery, call } from 'redux-saga/effects';
 import { createAction } from '@reduxjs/toolkit';
 import { actionsMembers } from './membersSlice';
+import { MembersResult } from './membersSlice';
 
 export const memberSet = createAction('memberSet', (payload) => {
   return { payload: payload };
@@ -31,7 +34,18 @@ export function* takeEveryMembers() {
   });
 
   yield takeEvery(membersCreate, function* (action) {
-    yield put(actionsMembers.membersCreate(action.payload));
+    const { navigation, member } = action.payload;
+    try {
+      const response: AxiosResponse<MembersResult> = yield call(() =>
+        axios.post('http://localhost:3100/api/v1/members', member)
+      );
+      console.log('Done membersCreate', response);
+      yield membersRead$();
+      alert('Created');
+      navigation.goBack();
+    } catch (error: any) {
+      axiosError(error);
+    }
   });
 
   const membersRead$ = function* () {
