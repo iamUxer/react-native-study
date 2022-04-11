@@ -3,7 +3,7 @@ import { axiosError } from '../common';
 import { put, takeEvery, call } from 'redux-saga/effects';
 import { createAction } from '@reduxjs/toolkit';
 import { actionsMembers } from './membersSlice';
-import { MembersResult } from './membersSlice';
+import { MembersResult, MembersResultRead } from './membersSlice';
 
 export const memberSet = createAction('memberSet', (payload) => {
   return { payload: payload };
@@ -37,7 +37,7 @@ export function* takeEveryMembers() {
     const { navigation, member } = action.payload;
     try {
       const response: AxiosResponse<MembersResult> = yield call(() =>
-        axios.post('http://localhost:3100/api/v1/members', member)
+        axios.post('http://192.168.219.103:3100/api/v1/members', member)
       );
       console.log('Done membersCreate', response);
       yield membersRead$();
@@ -49,7 +49,15 @@ export function* takeEveryMembers() {
   });
 
   const membersRead$ = function* () {
-    yield put(actionsMembers.membersRead());
+    try {
+      const response: AxiosResponse<MembersResultRead> = yield call(() =>
+        axios.get('http://192.168.219.103:3100/api/v1/members')
+      );
+      console.log('Done membersRead', response.data.members);
+      yield put(actionsMembers.membersRead(response.data.members));
+    } catch (error: any) {
+      axiosError(error);
+    }
   };
   yield takeEvery(membersRead, membersRead$);
 

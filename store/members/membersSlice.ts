@@ -22,6 +22,10 @@ export declare interface MembersResult {
   result: string;
 }
 
+export declare interface MembersResultRead extends MembersResult {
+  members: Array<Member>;
+}
+
 export const membersSlice = createSlice({
   name: 'members',
   initialState: membersState,
@@ -33,17 +37,8 @@ export const membersSlice = createSlice({
       state.members.push(action.payload);
       console.log('membersCreate', state.members);
     },
-    membersRead: (state) => {
-      state.members.push(
-        {
-          name: '홍길동',
-          age: 20,
-        },
-        {
-          name: '춘향이',
-          age: 16,
-        }
-      );
+    membersRead: (state, action) => {
+      state.members = action.payload;
     },
     membersDelete(state, action) {
       state.members.splice(action.payload, 1);
