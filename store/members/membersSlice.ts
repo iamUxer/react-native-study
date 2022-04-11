@@ -8,6 +8,7 @@ export declare interface Member {
 export declare interface MembersState {
   members: Array<Member>;
   member: Member;
+  refreshing: boolean;
 }
 
 const membersState: MembersState = {
@@ -16,6 +17,7 @@ const membersState: MembersState = {
     name: '',
     age: '',
   },
+  refreshing: false,
 };
 
 export declare interface MembersResult {
@@ -32,6 +34,9 @@ export const membersSlice = createSlice({
   reducers: {
     memberSet: (state, action) => {
       state.member = action.payload;
+    },
+    membersRefreshing: (state, action) => {
+      state.refreshing = action.payload;
     },
     membersCreate: (state, action) => {
       state.members.push(action.payload);

@@ -50,13 +50,16 @@ export function* takeEveryMembers() {
 
   const membersRead$ = function* () {
     try {
+      yield put(actionsMembers.membersRefreshing(true));
       const response: AxiosResponse<MembersResultRead> = yield call(() =>
         axios.get('http://192.168.219.103:3100/api/v1/members')
       );
       console.log('Done membersRead', response.data.members);
       yield put(actionsMembers.membersRead(response.data.members));
+      yield put(actionsMembers.membersRefreshing(false));
     } catch (error: any) {
       axiosError(error);
+      yield put(actionsMembers.membersRefreshing(false));
     }
   };
   yield takeEvery(membersRead, membersRead$);

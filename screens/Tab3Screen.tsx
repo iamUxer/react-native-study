@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useEffect } from 'react';
 import {
   Text,
@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Member } from '../store/members/membersSlice';
 import { stateMembers } from '../store/members/membersSlice';
 import actionsMembers from '../store/members/membersActions';
+import { RefreshControl } from 'react-native';
 
 const styles = StyleSheet.create({
   thead: {
@@ -64,7 +65,8 @@ const styles = StyleSheet.create({
 
 function Tab3Screen({ navigation }: any) {
   const dispatch = useDispatch();
-  const members = JSON.parse(JSON.stringify(useSelector(stateMembers).members));
+  // const members = JSON.parse(JSON.stringify(useSelector(stateMembers).members));
+  const { members, refreshing } = useSelector(stateMembers);
   // const members = Object.assign([], useSelector(stateMembers).members);
   useEffect(() => {
     dispatch(
@@ -75,6 +77,7 @@ function Tab3Screen({ navigation }: any) {
     );
     dispatch(actionsMembers.membersRead());
   }, [dispatch]);
+
   return (
     <>
       <View nativeID="thead" style={styles.thead}>
@@ -85,7 +88,18 @@ function Tab3Screen({ navigation }: any) {
           <Text style={[styles.flex1, styles.textAlignCenter]}>삭제</Text>
         </View>
       </View>
-      <ScrollView nativeID="tbody" style={styles.tbody}>
+      <ScrollView
+        nativeID="tbody"
+        style={styles.tbody}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={() => {
+              dispatch(actionsMembers.membersRead());
+            }}
+          />
+        }
+      >
         {members.map((member: Member, index: number) => (
           <View key={index} nativeID="member" style={styles.member}>
             <Text style={styles.memberName}>{member.name}</Text>
