@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { ServerResponse } from 'http';
 
 // Members, Member 타입 생성
 export declare interface Member {
@@ -26,6 +27,10 @@ export declare interface MembersResult {
 
 export declare interface MembersResultRead extends MembersResult {
   members: Array<Member>;
+}
+
+export declare interface FetchServerResponse extends ServerResponse {
+  json: Function;
 }
 
 export const membersSlice = createSlice({

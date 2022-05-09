@@ -3,7 +3,11 @@ import { axiosError } from '../common';
 import { put, takeEvery, call } from 'redux-saga/effects';
 import { createAction } from '@reduxjs/toolkit';
 import { actionsMembers } from './membersSlice';
-import { MembersResult, MembersResultRead } from './membersSlice';
+import {
+  MembersResult,
+  MembersResultRead,
+  FetchServerResponse,
+} from './membersSlice';
 
 export const memberSet = createAction('memberSet', (payload) => {
   return { payload: payload };
@@ -34,12 +38,30 @@ export function* takeEveryMembers() {
   });
 
   yield takeEvery(membersCreate, function* (action) {
-    const { navigation, member } = action.payload;
+    const { navigation, member, file } = action.payload;
     try {
-      const response: AxiosResponse<MembersResult> = yield call(() =>
-        axios.post('http://192.168.219.103:3100/api/v1/members', member)
+      const response: FetchServerResponse = yield call(
+        () => {
+          const formData = new FormData();
+          formData.append('file', {
+            uri: file.uri,
+            type: file.mimeType,
+            name: file.name,
+          } as any);
+          formData.append('member', JSON.stringify(member));
+          const response = fetch('http://192.168.219.103:3100/api/v1/files', {
+            method: 'POST',
+            body: formData,
+            headers: {
+              'content-type': 'multipart/form-data',
+            },
+          });
+          return response;
+        }
+        // axios.post('http://192.168.219.103:3100/api/v1/members', member)
       );
-      console.log('Done membersCreate', response);
+      const responseJson: string = yield call(() => response.json());
+      console.log('Done membersCreate', responseJson);
       yield membersRead$();
       alert('Created');
       navigation.goBack();

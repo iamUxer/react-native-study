@@ -7,6 +7,7 @@ import {
   ScrollView,
   Pressable,
   Alert,
+  Button,
 } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { StyleSheet } from 'react-native';
@@ -15,6 +16,7 @@ import { Member } from '../store/members/membersSlice';
 import { stateMembers } from '../store/members/membersSlice';
 import actionsMembers from '../store/members/membersActions';
 import { RefreshControl } from 'react-native';
+import * as DocumentPicker from 'expo-document-picker';
 
 const styles = StyleSheet.create({
   thead: {
@@ -151,11 +153,38 @@ export function ModalCreate(props: any) {
   const dispatch = useDispatch();
   console.log(props.route.name);
   const member: Member = { ...useSelector(stateMembers).member };
+  const [file, setFile] = useState(null);
   console.log(member);
+
+  const fileUpdate = async () => {
+    const fileResult: DocumentPicker.DocumentResult =
+      await DocumentPicker.getDocumentAsync();
+    console.log(fileResult);
+    if (fileResult.type !== 'success') return;
+    console.log(fileResult.uri);
+    setFile(fileResult as any);
+    // const formData = new FormData();
+    // formData.append('file', {
+    //   uri: fileResult.uri,
+    //   type: fileResult.mimeType,
+    //   name: fileResult.name,
+    // } as any);
+    // const response = await fetch('http://192.168.219.103:3100/api/v1/files', {
+    //   method: 'POST',
+    //   body: formData,
+    //   headers: {
+    //     'content-type': 'multipart/form-data',
+    //   },
+    // });
+    // const responseJson = await response.json();
+    // console.log({ responseJson });
+  };
+
   return (
     <>
       <View nativeID="thead" style={styles.thead}>
         <View nativeID="member" style={styles.member}>
+          <Text style={[styles.flex1, styles.textAlignCenter]}>파일</Text>
           <Text style={[styles.flex1, styles.textAlignCenter]}>이름</Text>
           <Text style={[styles.flex1, styles.textAlignCenter]}>나이</Text>
           <Text style={[styles.flex1, styles.textAlignCenter]}>생성</Text>
@@ -163,6 +192,7 @@ export function ModalCreate(props: any) {
       </View>
       <ScrollView nativeID="tbody" style={styles.tbody}>
         <View nativeID="member" style={styles.member}>
+          <Button title="File Update" onPress={() => fileUpdate()} />
           <TextInput
             style={[styles.memberName, styles.borderStyle]}
             placeholder="Name"
@@ -184,7 +214,9 @@ export function ModalCreate(props: any) {
           />
           <Pressable
             onPress={() => {
-              dispatch(actionsMembers.membersCreate({ member, navigation }));
+              dispatch(
+                actionsMembers.membersCreate({ member, navigation, file })
+              );
             }}
             style={styles.memberUpdate}
           >
